@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>zig-wasm-audio</title>
+</head>
+
+<script src="coi-serviceworker.js"></script>
+
+<script type="module" defer="true">
+    import { WasmPcm } from "./wasmpcm.js";
+
+    window.addEventListener('load', async () => {
+        const buttonEl = document.getElementById('button-start');
+        buttonEl.addEventListener('click', async () => {
+            const audioContext = new AudioContext();
+            await WasmPcm.startAudio('lib/mod.wasm', audioContext);
+            buttonEl.style.visibility = 'hidden';
+        }, false);
+    });
+
+</script>
+
+<body>
+    <p>
+        <button id="button-start">START</button>
+    </p>
+    <p>
+        <a href="https://github.com/rombankzero/pocketmod/">pocketmod</a>, is a small ANSI C library for turning ProTracker MOD files into playable PCM audio</br>
+        <a href="https://modarchive.org/index.php?request=view_by_moduleid&query=35151">bananasplit.mod</a> is 297KB and is distributed under the <a href="https://modarchive.org/index.php?terms-upload">Mod Archive Distribution License</a>
+    </p>
+</body>
+
+</html>
